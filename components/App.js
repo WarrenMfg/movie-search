@@ -1,5 +1,5 @@
 import React from 'react';
-import Search from './Search';
+import SearchAndDisplay from './SearchAndDisplay';
 import './css/AppCSS.css';
 
 class App extends React.Component {
@@ -7,7 +7,7 @@ class App extends React.Component {
     return (
       <div className='container'>
         <h1 className='title'>Movie Search</h1>
-        <Search />
+        <SearchAndDisplay />
       </div>
     );
   }

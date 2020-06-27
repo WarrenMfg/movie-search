@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import Movie from './Movie';
 import $ from 'jquery';
 import { token } from '../config';
 import './css/SearchCSS.css';
 
-export default function Search() {
+export default function SearchAndDisplay() {
   // states
   const [ userInput, setUserInput ] = useState('');
   const [ results, setResults ] = useState([]);
@@ -61,24 +62,29 @@ export default function Search() {
   };
 
   return (
-    <form className='form' onSubmit={handleSearch}>
-      <label htmlFor='userInput' className='label'>
-        Movie Name
-      </label>
+    <div>
+      <form className='form' onSubmit={handleSearch}>
+        <label htmlFor='userInput' className='label'>
+          Movie Name
+        </label>
 
-      <input
-        type='text'
-        name='userInput'
-        value={userInput}
-        onChange={e => setUserInput(e.target.value)}
-        className='input'
-        id='userInput'
-        placeholder='Jurassic Park'
-      />
+        <input
+          type='text'
+          name='userInput'
+          value={userInput}
+          onChange={e => setUserInput(e.target.value)}
+          className='input'
+          id='userInput'
+          placeholder='Jurassic Park'
+        />
 
-      <button type='submit' className='button'>
-        Search
-      </button>
-    </form>
+        <button type='submit' className='button'>
+          Search
+        </button>
+      </form>
+      <div className='card-list'>
+        {results.filter(result => result.poster_path).map(result => <Movie key={result.id} result={result} />)}
+      </div>
+    </div>
   );
 }
