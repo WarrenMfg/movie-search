@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Movie from './Movie';
 import $ from 'jquery';
-// import { TOKEN } from '../config';
 import './css/SearchCSS.css';
 
 export default function SearchAndDisplay() {
@@ -17,17 +16,13 @@ export default function SearchAndDisplay() {
     if (!userInput) return;
 
     // API url
-    const url = `https://api.themoviedb.org/3/search/movie?query=${userInput}&language=en-US&page=1&include_adult=false`;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=ad9bcd4ef3dc30870f256fa4c8ff9904&query=${userInput}&language=en-US&page=1&include_adult=false`;
 
-    console.log('process.env', process.env);
     // AJAX
     $.ajax({
       url,
       type: 'GET',
       dataType: 'json',
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
-      },
       success: data => {
         // if no results, handle errors
         if (!data.results.length) return handleErrors();
