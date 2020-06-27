@@ -16,6 +16,38 @@
   border-radius: 5px;
 }
 
+.card--social {
+  text-align: center;
+}
+
+.sms,
+.email {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.75);
+  padding: 1rem 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sms {
+  margin-right: 0.5rem;
+}
+
+.email {
+  margin-left: 0.5rem;
+}
+
+.sms:hover,
+.email:hover {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
 .card--title {
   margin-bottom: 0.5rem;
   font-size: 3.2rem;
@@ -35,7 +67,7 @@ small {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: 'image content';
   }
-  .card--image {
+  .card--image-social {
     grid-area: image;
     align-self: center;
   }
