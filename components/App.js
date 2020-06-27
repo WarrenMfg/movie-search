@@ -1,6 +1,6 @@
 import React from 'react';
 import Search from './Search';
-import '../client/style.css';
+import './css/AppCSS.css';
 
 class App extends React.Component {
   render() {
