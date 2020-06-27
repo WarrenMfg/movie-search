@@ -1,8 +1,15 @@
 import React from 'react';
+import Search from './Search';
+import '../client/style.css';
 
 class App extends React.Component {
   render() {
-    return <h1>Hello World!</h1>;
+    return (
+      <div className='container'>
+        <h1 className='title'>Movie Search</h1>
+        <Search />
+      </div>
+    );
   }
 }
 
