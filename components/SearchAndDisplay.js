@@ -19,6 +19,7 @@ export default function SearchAndDisplay() {
     // API url
     const url = `https://api.themoviedb.org/3/search/movie?query=${userInput}&language=en-US&page=1&include_adult=false`;
 
+    console.log('process.env', process.env);
     // AJAX
     $.ajax({
       url,
