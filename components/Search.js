@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
 import { token } from '../config';
-import { handleErrors } from '../utils';
 import './css/SearchCSS.css';
 
 export default function Search() {
   // states
   const [ userInput, setUserInput ] = useState('');
+  const [ results, setResults ] = useState([]);
 
   const handleSearch = e => {
     // prevent default form behavior
@@ -18,41 +18,46 @@ export default function Search() {
     // API url
     const url = `https://api.themoviedb.org/3/search/movie?query=${userInput}&language=en-US&page=1&include_adult=false`;
 
-    // fetch data from movie database
-    fetch(url, {
+    // AJAX
+    $.ajax({
+      url,
+      type: 'GET',
+      dataType: 'json',
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(handleErrors)
-      .then(data => {
-        // if no results, throw
-        if (!data.results.length) throw 'No movie with that name.';
+        Authorization: `Bearer ${token}`
+      },
+      success: data => {
+        // if no results, handle errors
+        if (!data.results.length) return handleErrors();
 
-        console.log('data.results', data.results);
+        // update results state
+        setResults(data.results);
 
         // reset input
         setUserInput('');
-      })
-      .catch(err => {
+      },
+      error: (xhr, errorType, exception) => {
         // log error
-        console.log('Search error:', err);
+        console.log('Search error:', xhr, errorType, exception);
+        // handle error
+        handleErrors();
+      }
+    });
 
-        // toggle error class
-        // userInput.toggleClass('userInputError');
-        document.getElementById('userInput').classList.add('userInputError');
+    const handleErrors = () => {
+      // toggle error class
+      const $userInput = $('#userInput');
+      $userInput.toggleClass('userInputError');
 
-        // provide feedback
-        setUserInput('No movie with that name.');
+      // provide feedback
+      setUserInput('No movie with that name.');
 
-        // reset input
-        setTimeout(() => {
-          // userInput.toggleClass('userInputError');
-          document.getElementById('userInput').classList.remove('userInputError');
-          setUserInput('');
-        }, 2000);
-      });
+      // reset input
+      setTimeout(() => {
+        $userInput.toggleClass('userInputError');
+        setUserInput('');
+      }, 2000);
+    };
   };
 
   return (
