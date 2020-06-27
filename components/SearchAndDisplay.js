@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Movie from './Movie';
 import $ from 'jquery';
-import { token } from '../config';
+// import { TOKEN } from '../config';
 import './css/SearchCSS.css';
 
 export default function SearchAndDisplay() {
@@ -25,7 +25,7 @@ export default function SearchAndDisplay() {
       type: 'GET',
       dataType: 'json',
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${TOKEN}`
       },
       success: data => {
         // if no results, handle errors
