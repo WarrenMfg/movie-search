@@ -25,7 +25,7 @@ export default function SearchAndDisplay() {
       type: 'GET',
       dataType: 'json',
       headers: {
-        Authorization: `Bearer ${TOKEN}`
+        Authorization: `Bearer ${process.env.TOKEN || TOKEN}`
       },
       success: data => {
         // if no results, handle errors
