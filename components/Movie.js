@@ -10,7 +10,14 @@ export default function Movie({ result }) {
     const href = target.attr('href');
     let smsBody = `Title: ${result.title}%0aRelease Date: ${result.release_date}%0aAverage Vote: ${result.vote_average}%0aOverview: ${result.overview}`;
 
-    target.attr('href', ua.includes('iPhone') ? `${href}&body=${smsBody}` : `${href}+&body=${smsBody}`);
+    // device logic for href
+    if (ua.includes('iPhone')) {
+      target.attr('href', `${href}&body=${smsBody}`);
+    } else if (ua.includes('Android')) {
+      target.attr('href', `${href}?body=${smsBody}`);
+    } else {
+      target.attr('href', `${href}+&body=${smsBody}`);
+    }
 
     setTimeout(
       () => {
