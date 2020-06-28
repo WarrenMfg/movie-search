@@ -8,7 +8,7 @@ export default function Movie({ result }) {
   const sms = e => {
     const target = $(e.target);
     const href = target.attr('href');
-    let smsBody = `Title: ${result.title}%0aRelease Date: ${result.release_date}%0aAverage Vote: ${result.vote_average}%0aOverview: ${result.overview}`;
+    let smsBody = `https://image.tmdb.org/t/p/w185/${result.poster_path}%0aTitle: ${result.title}%0aRelease Date: ${result.release_date}%0aAverage Vote: ${result.vote_average}%0aOverview: ${result.overview}`;
 
     // device logic for href
     if (ua.includes('iPhone')) {
@@ -31,7 +31,7 @@ export default function Movie({ result }) {
   const email = e => {
     const target = $(e.target);
     const href = target.attr('href');
-    let emailBody = `Title: ${result.title}%0aRelease Date: ${result.release_date}%0aAverage Vote: ${result.vote_average}%0aOverview: ${result.overview}`;
+    let emailBody = `Poster: https://image.tmdb.org/t/p/w185/${result.poster_path}%0aTitle: ${result.title}%0aRelease Date: ${result.release_date}%0aAverage Vote: ${result.vote_average}%0aOverview: ${result.overview}`;
 
     target.attr('href', `${href}${emailBody}`);
 
