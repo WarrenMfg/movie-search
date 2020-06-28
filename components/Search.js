@@ -23,7 +23,7 @@ export default function Search({ setResults }) {
       dataType: 'json',
       success: data => {
         // if no results, handle errors
-        if (!data.results.length) return handleErrors();
+        if (!data.results.length) return handleErrors('No movie with that name.');
 
         // update results state
         setResults(data.results);
@@ -35,17 +35,17 @@ export default function Search({ setResults }) {
         // log error
         console.log('Search error:', xhr, errorType, exception);
         // handle error
-        handleErrors();
+        handleErrors('Sorry, an error has occurred.');
       }
     });
 
-    const handleErrors = () => {
+    const handleErrors = feedback => {
       // toggle error class
       const $userInput = $('#userInput');
       $userInput.toggleClass('userInputError');
 
       // provide feedback
-      setUserInput('No movie with that name.');
+      setUserInput(feedback);
       $userInput.blur();
 
       // reset input

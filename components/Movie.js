@@ -60,7 +60,7 @@ export default function Movie({ result }) {
       <div className='card--content'>
         <h3 className='card--title'>{result.title}</h3>
         <p>
-          <small>RELEASE DATE: {result.release_date}</small>
+          <small>RELEASE DATE: {new Date(result.release_date).toUTCString().slice(0, -13)}</small>
         </p>
         <p>
           <small>AVERAGE VOTE: {result.vote_average}</small>
