@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import Movie from './Movie';
 import $ from 'jquery';
 import './css/SearchCSS.css';
 
-export default function SearchAndDisplay() {
+export default function Search({ setResults }) {
   // states
   const [ userInput, setUserInput ] = useState('');
-  const [ results, setResults ] = useState([]);
 
   const handleSearch = e => {
     // prevent default form behavior
@@ -48,39 +46,36 @@ export default function SearchAndDisplay() {
 
       // provide feedback
       setUserInput('No movie with that name.');
+      $userInput.blur();
 
       // reset input
       setTimeout(() => {
         $userInput.toggleClass('userInputError');
         setUserInput('');
+        $userInput.focus();
       }, 2000);
     };
   };
 
   return (
-    <div>
-      <form className='form' onSubmit={handleSearch}>
-        <label htmlFor='userInput' className='label'>
-          Movie Name
-        </label>
+    <form className='form' onSubmit={handleSearch}>
+      <label htmlFor='userInput' className='label'>
+        Movie Name
+      </label>
 
-        <input
-          type='text'
-          name='userInput'
-          value={userInput}
-          onChange={e => setUserInput(e.target.value)}
-          className='input'
-          id='userInput'
-          placeholder='Jurassic Park'
-        />
+      <input
+        type='text'
+        name='userInput'
+        value={userInput}
+        onChange={e => setUserInput(e.target.value)}
+        className='input'
+        id='userInput'
+        placeholder='Jurassic Park'
+      />
 
-        <button type='submit' className='button'>
-          Search
-        </button>
-      </form>
-      <div className='card-list'>
-        {results.filter(result => result.poster_path).map(result => <Movie key={result.id} result={result} />)}
-      </div>
-    </div>
+      <button type='submit' className='button'>
+        Search
+      </button>
+    </form>
   );
 }
